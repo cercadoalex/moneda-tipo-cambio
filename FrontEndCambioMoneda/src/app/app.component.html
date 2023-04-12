@@ -1,0 +1,92 @@
+
+<button *ngIf="stateCambioMoneda" class="btn-modificar" (click)="NuevoTipoCambio()" >Actualizar Tipo Cambio</button>
+<br>
+<br>
+<div class="wrapper" *ngIf="stateCambioMoneda">
+    <header>Convertidor De Moneda</header>
+    <form action="#">
+        <div class="amount">
+            <p>Introduzca El Monto
+            </p>
+            <input name="monto" type="text" [(ngModel)]="monto">
+        </div>
+        <div class="drop-list">
+            <div class="from">
+                <p>De</p>
+                <div class="select-box">
+                    <img  [src]="imagenMonedaOrigen" alt="flag" *ngIf="selectedMonedaOrigen">
+
+                    <select name="selectedSorteo" [(ngModel)]="selectedMonedaOrigen" (change)="ChangeMonedaOrigen($event)"
+                        class="form-control form-control-sm">
+                        <option *ngFor="let item of divisas" [ngValue]="item">
+                            {{item.iso}}</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="icon"><i class="fas fa-exchange-alt"></i></div>
+            <div class="to">
+                <p>Para</p>
+                <div class="select-box">
+                    <img  [src]="imagenMonedaDestino" alt="flag" *ngIf="selectedMonedaDestino">
+
+                    <select name="selectedSorteo" [(ngModel)]="selectedMonedaDestino" (change)="ChangeMonedaDestino($event)"
+                        class="form-control form-control-sm">
+                        <option *ngFor="let item of divisas" [ngValue]="item">
+                            {{item.iso}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="exchange-rate">{{valorCambio}}</div>
+        <button (click)="RealizarConversion()" >Obtener Tipo Cambio</button>
+    </form>
+</div>
+
+
+
+<div class="wrapper" *ngIf="stateActualizarCambioMoneda">
+    <header>Modificar Tipo Cambio</header>
+    <form action="#">
+
+        <div class="drop-list">
+            <div class="from">
+                <p>Un dolar</p>
+                <div class="select-box">
+                    <img  src="https://flagcdn.com/48x36/us.png" alt="flag">
+                    <p style="text-align: center;padding: 5px 1px 1px 5px;">USD</p>
+                    
+
+                </div>
+            </div>
+            <div class="icon"><i class="fas fa-exchange-alt"></i></div>
+            <div class="to">
+                <p>Equivale</p>
+                <div class="select-box">
+                    <img  [src]="imagenMonedaDestino" alt="flag" *ngIf="selectedMonedaDestino">
+
+                    <select name="selectedSorteo" [(ngModel)]="selectedMonedaDestino" (change)="ChangeModificarMonedaDestino($event)"
+                        class="form-control form-control-sm">
+                        <option *ngFor="let item of divisas" [ngValue]="item">
+                            {{item.iso}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="amount">
+            <p> El Nuevo Valor
+            </p>
+            <input name="monto2" type="text" [(ngModel)]="montoModificar">
+        </div>
+        <div class="exchange-rate">{{valorCambio}}</div>
+        <button (click)="RealizarModificacion()" >Modificar Cambio</button>
+        <br>
+        <br>
+        <p>{{texto_servicio}}</p>
+        <br>
+        <button class="btn-modificar" (click)="Retroceder()" >Atras</button>
+
+    </form>
+</div>
+
